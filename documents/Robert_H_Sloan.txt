@@ -193,23 +193,3 @@ Grade: A
 Textbook: No
 Sloan is a great professor, he takes time to explain things; however I found lecture extremely boring. Do your projects and tests are open ended questions. I was in the CS 111 section combined with Biology, which was terrible in my opinion. It was like taking Bio and CS at the same time, both of which are difficult topics.
 TEST HEAVY
-
-Quality
-5.0
-Difficulty
-3.0
-CS201
-May 3rd, 2007
-Textbook: Yes
-Wonderful professor. Quirky, in a way, but extremely good at getting material across and answering questions. This guy wants you to succeed, and if you take a class with him, you probably will.
-Caring 
-
-Quality
-4.0
-Difficulty
-3.0
-CS201
-Mar 5th, 2007
-Textbook: Yes
-This teacher is not that bad. Although he may expect a little too much from his students. He will usually assign a program and it doesn't matter if it will take 5 hours to complete or 30+ hours to complete you usually only get a week at most to finish. Other than that he makes CS201 very easy and understandable. He is also a pretty fair grader.
-Lecture heavy

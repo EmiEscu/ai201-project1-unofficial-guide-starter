@@ -197,6 +197,30 @@ def show_chunk(records: list[dict], professor: str, review_index: int) -> None:
     print_chunk(target[0])
 
 
+def show_all_chunks(records: list[dict], professor: str) -> None:
+    """Print every chunk for the given professor, in review order.
+
+    Like `show_chunk`, the professor match is case-insensitive and partial, so
+    `--all pina` works as well as `--all "Luis Pina"`.
+    """
+    needle = professor.lower()
+    matches = [r for r in records if needle in r["metadata"]["professor"].lower()]
+
+    if not matches:
+        names = sorted({r["metadata"]["professor"] for r in records})
+        print(f"No professor matching {professor!r}. Available professors:")
+        for name in names:
+            print(f"  - {name}")
+        return
+
+    matches.sort(key=lambda r: r["metadata"]["review_index"])
+    prof_name = matches[0]["metadata"]["professor"]
+    print(f"All {len(matches)} chunks for {prof_name}:\n")
+    for record in matches:
+        print_chunk(record)
+        print()
+
+
 # --- Entry point -------------------------------------------------------------
 
 def main() -> None:
@@ -208,6 +232,11 @@ def main() -> None:
         nargs=2,
         metavar=("PROFESSOR", "REVIEW_INDEX"),
         help="Inspect one chunk, e.g. --show \"Luis Pina\" 10  (reviews are 0-indexed)",
+    )
+    parser.add_argument(
+        "--all",
+        metavar="PROFESSOR",
+        help="Print every chunk for one professor in order, e.g. --all \"Luis Pina\"",
     )
     args = parser.parse_args()
 
@@ -230,7 +259,10 @@ def main() -> None:
     # chunk so you can eyeball that a whole review was captured (starts at
     # 'Quality', ends at descriptor tags) — the manual verification the planning
     # doc calls for.
-    if args.show:
+    if args.all:
+        print()
+        show_all_chunks(records, args.all)
+    elif args.show:
         professor, raw_index = args.show
         try:
             review_index = int(raw_index)

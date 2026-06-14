@@ -113,23 +113,30 @@ If I deployed this for real users with cost off the table, I'd move from all-Min
 
 ```mermaid
 flowchart TD
-    %% Your Mermaid code goes here
-    style ETL fill:#2d333b,stroke:#444c56,color:#adbac7,stroke-width:2px
-    style RAG fill:#2d333b,stroke:#444c56,color:#adbac7,stroke-width:2px
-    classDef default fill:#ffffff,stroke:#333333,color:#000000,stroke-width:2px;
-    linkStyle default stroke:#adbac7,stroke-width:2px;
+    %% Creative & Clean Theme Definitions
+    classDef etl fill:#e0f2fe,stroke:#0284c7,color:#0369a1,stroke-width:1.5px;
+    classDef rag fill:#faf5ff,stroke:#9333ea,color:#6b21a8,stroke-width:1.5px;
+    classDef storage fill:#f0fdf4,stroke:#16a34a,color:#166534,stroke-width:2px;
+    classDef io fill:#fff7ed,stroke:#ea580c,color:#9a3412,stroke-width:1.5px;
+
+    %% Subgraph Layout Styling
+    style ETL fill:#f8fafc,stroke:#e2e8f0,color:#475569,stroke-width:1.5px;
+    style RAG fill:#f8fafc,stroke:#e2e8f0,color:#475569,stroke-width:1.5px;
+
+    %% Global Link Styling
+    linkStyle default stroke:#94a3b8,stroke-width:2px;
 
     subgraph ETL["Phase 1: Document Pipeline (ETL)"]
-        DI["Document Ingestion<br/>(Raw .txt Reviews)"] --> CH["Chunking<br/>(Separator: \n\n)"]
-        CH --> EM["Embedding<br/>(all-MiniLM-L6-v2)"]
-        EM --> VS[("Vector Store<br/>(ChromaDB)")]
+        DI["10 UIC Professor<br/>Document Ingestions<br/>(Raw .txt Reviews)"]:::etl --> CH["Chunking (chunking.py)<br/>(Separator: Line Breaks)"]:::etl
+        CH --> EM["Embedding<br/>(all-MiniLM-L6-v2)"]:::etl
+        EM --> VS[("Vector Store<br/>(ChromaDB)")]:::storage
     end
 
     subgraph RAG["Phase 2: Query Pipeline (RAG)"]
-        UQ(["User Query"]) --> RET["Retrieval<br/>(Semantic Search, Top-k: 5)"]
+        UQ(["User Query"]):::io --> RET["Retrieval<br/>(Semantic Search, Top-k: 5)"]:::rag
         VS -.->|Returns top 5 chunks| RET
-        RET --> GEN["Generation<br/>(LLM: Groq llama-3.3-70b-versatile)"]
-        GEN --> GR(["Grounded Response<br/>(with Citations)"])
+        RET --> GEN["Generation<br/>(LLM: Groq llama-3.3-70b-versatile)"]:::rag
+        GEN --> GR(["Grounded Response<br/>(with Citations)"]):::io
     end
 ```
 
@@ -147,8 +154,11 @@ flowchart TD
      "I'll give Claude my Chunking Strategy section and ask it to implement chunk_text()
      with my specified chunk size and overlap" is a plan. -->
 
-**Milestone 3 — Ingestion and chunking:**
+Milestone 3 — Ingestion and chunking:
+I will use Claude and Gemini to process my planning and architecture files and generate a Python script that chunks reviews by \n\n spacing, verifying the output through manual inspection of the resulting data.
 
-**Milestone 4 — Embedding and retrieval:**
+Milestone 4 — Embedding and retrieval:
+Using the generated chunks alongside ChromaDB and all-MiniLM-L6-v2 configurations, I will write the embedding and retrieval functions to load the database and set a top-k of 5, verifying the pipeline by testing pre-answered questions and checking the cosine distance values.
 
-**Milestone 5 — Generation and interface:**
+Milestone 5 — Generation and interface:
+I will integrate the retrieval logic, the Groq API (llama-3.3-70b-versatile) with strict system prompts, and the Gradio skeleton code into a complete app.py script, verifying the final interface by testing both relevant project queries and irrelevant, out-of-scope questions.

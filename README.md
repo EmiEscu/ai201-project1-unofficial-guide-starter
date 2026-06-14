@@ -9,31 +9,27 @@
 
 ## Domain
 
-<!-- What topic or category of knowledge does your system cover?
-     Why is this knowledge valuable, and why is it hard to find through official channels?
-     Example: "Student reviews of CS professors at [university] — useful because official
-     course descriptions don't reflect teaching style, exam difficulty, or workload." -->
-
+<!-- What domain did you choose? Why is this knowledge valuable and hard to find through official channels? -->
+The domain that I choose was "Course and Professors Reviews at UIC". The reason why I chose this domain is because I am a rising transfer Junior at UIC and I am simply not familiar with the professors or the space at all. Sure I can go ahead a search each professor in Rate My Professor, but that will take too much time, and if I want to compare professors I have to make sure that they have similar classes. The reason why this knowledge is hard to find is simply because theres dozens of professors and remembering all of them and how they rank can be difficult. 
 ---
 
-## Document Sources
+## Documents
 
-<!-- List every source you collected documents from.
-     Be specific: include URLs, subreddit names, forum thread titles, or file names.
-     Aim for variety — sources that together cover different subtopics or perspectives. -->
+<!-- List your specific sources: URLs, subreddit names, forum threads, or file descriptions.
+     Aim for at least 10 sources that together cover different subtopics or perspectives within your domain. -->
 
-| # | Source | Type | URL or file path |
-|---|--------|------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+| # | Source | Description | URL or location |
+|---|--------|-------------|-----------------|
+| 1 | RMP | RMP Info for Abolfazl Asudeh  | documents\Abolfazl_Asudeh.txt |    
+| 2 | RMP | RMP Info for Natalie Parde | documents\Natalie_Parde.txt |
+| 3 | RMP | RMP Info for Jason Polakis | documents\Jason_Polakis.txt |
+| 4 | RMP | RMP Info for Pat Troy | documents\Pat_Troy.txt |
+| 5 | RMP | RMP Info for Luis Pina | documents\Luis_Pina.txt |
+| 6 | RMP | RMP Info for Shanon Reckinger | documents\Shanon_Reckinger.txt |
+| 7 | RMP | RMP Info for Sara Riazi | documents\Sara_Riazi.txt |
+| 8 | RMP | RMP Info for Pedram Rooshenas | documents\Pedram_Rooshenas.txt |
+| 9 | RMP | RMP Info for Anastasios Sidiropoulos | documents\Anastasios_Sidiropoulos.txt |
+| 10 | RMP | RMP Info for Robert H. Sloan| documents\Robert_H_Sloan.txt|
 
 ---
 

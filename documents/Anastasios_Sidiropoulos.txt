@@ -70,7 +70,7 @@ Quality
 5.0
 Difficulty
 2.0
-Computer Icon CS301
+CS301
 Jan 18th, 2022
 For Credit: Yes
 Attendance: Mandatory
@@ -104,8 +104,7 @@ Attendance: Not Mandatory
 Would Take Again: Yes
 Textbook: No
 I took CS594 - Foundations of Blockchains under this professor. This is hands down the best course I've ever taken. The lectures are exceptional. But be prepared to work hard, we were given around 50 white papers to read. You will learn quite a lot. No exams or midterms, just some homework, and one final white paper presentation.
-Skip class? You won't pass.Amazing lecturesSo many papers
-Participation matters
+Amazing lectures So many papers Participation matters
 
 Quality
 5.0
@@ -124,7 +123,7 @@ Quality
 4.0
 Difficulty
 3.0
-Computer Icon CS505
+CS505
 Jun 14th, 2021
 For Credit: Yes
 Attendance: Not Mandatory

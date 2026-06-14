@@ -9,6 +9,7 @@ Attendance: Mandatory
 Grade: C
 Textbook: Yes
 Harsh Feedback, Unnecessary Hard, Zybooks Used, Unclear Directions
+Tough grader
 
 Quality
 2.0
@@ -102,7 +103,7 @@ Attendance: Mandatory
 Grade: B+
 Textbook: N/A
 Passing this class and/or getting a B in the class is doable as long as you do your homework and labs. Two weeks worth of work are dropped which includes attendance, labs, in-class coding, coding projects, reading. All exams are only worth 35%. Prof goes through slides in lectures which aren't very good. No extensions.
-Group projectsLots of homework
+Group projects Lots of homework
 
 Quality
 1.0
@@ -167,7 +168,7 @@ Attendance: Mandatory
 Grade: A
 Textbook: Yes
 bad professor, thick accent, laughs at his own jokes, test heavy, mandatory attendance, doesn't teach in lecture
-Get ready to readLots of homework
+Get ready to read Lots of homework
 
 Quality
 1.0
@@ -220,6 +221,7 @@ Would Take Again: Yes
 Grade: Incomplete
 Textbook: Yes
 Polakis and his class can be intimidating. The homeworks are no joke and the exams truly show if you paid attention. If network security is not an interest, DON'T TAKE THE CLASS. If it is an interest, then you learn to appreciate the class. Polakis is informative with every topic and the homeworks are unique. Show effort and he can be forgiving.
+Lots of homework
 
 Quality
 3.0

@@ -2,7 +2,7 @@ Quality
 5.0
 Difficulty
 2.0
-401
+CS401
 Jan 8th, 2025
 For Credit: Yes
 Attendance: Mandatory
@@ -16,7 +16,7 @@ Quality
 1.0
 Difficulty
 4.0
-480
+CS480
 Dec 24th, 2024
 For Credit: Yes
 Attendance: Mandatory
@@ -29,7 +29,7 @@ Quality
 3.0
 Difficulty
 4.0
-401
+CS401
 Dec 18th, 2024
 For Credit: Yes
 Attendance: Mandatory
@@ -43,7 +43,7 @@ Quality
 1.0
 Difficulty
 3.0
-401
+CS401
 Dec 8th, 2024
 For Credit: Yes
 Attendance: Not Mandatory
@@ -56,7 +56,7 @@ Quality
 1.0
 Difficulty
 5.0
-401
+CS401
 Dec 8th, 2024
 For Credit: Yes
 Attendance: Mandatory
@@ -69,7 +69,7 @@ Quality
 1.0
 Difficulty
 4.0
-401
+CS401
 Oct 20th, 2024
 For Credit: Yes
 Attendance: Not Mandatory
@@ -82,7 +82,7 @@ Quality
 5.0
 Difficulty
 2.0
-501
+CS401
 Jun 30th, 2024
 For Credit: Yes
 Attendance: Mandatory
@@ -97,7 +97,7 @@ Quality
 1.0
 Difficulty
 2.0
-401
+CS401
 Jan 10th, 2024
 For Credit: Yes
 Attendance: Mandatory
@@ -110,7 +110,7 @@ Quality
 1.0
 Difficulty
 3.0
-Computer Icon 401
+CS401
 Dec 28th, 2023
 For Credit: Yes
 Attendance: Mandatory
@@ -124,7 +124,7 @@ Quality
 5.0
 Difficulty
 1.0
-401
+CS401
 Aug 22nd, 2023
 For Credit: Yes
 Attendance: Mandatory
@@ -138,7 +138,7 @@ Quality
 5.0
 Difficulty
 3.0
-501
+CS401
 Jun 7th, 2023
 For Credit: Yes
 Attendance: Not Mandatory
@@ -152,7 +152,7 @@ Quality
 5.0
 Difficulty
 3.0
-501
+CS401
 Mar 21st, 2023
 For Credit: Yes
 Would Take Again: Yes
@@ -164,7 +164,7 @@ Quality
 5.0
 Difficulty
 2.0
-501
+CS401
 Mar 13th, 2023
 For Credit: Yes
 Attendance: Mandatory
@@ -178,7 +178,7 @@ Quality
 5.0
 Difficulty
 4.0
-501
+CS401
 Dec 12th, 2022
 For Credit: Yes
 Attendance: Not Mandatory
@@ -192,7 +192,7 @@ Quality
 5.0
 Difficulty
 4.0
-501
+CS401
 Dec 3rd, 2022
 For Credit: Yes
 Attendance: Mandatory
@@ -206,7 +206,7 @@ Quality
 5.0
 Difficulty
 3.0
-501
+CS401
 Nov 27th, 2022
 For Credit: Yes
 Attendance: Not Mandatory

@@ -40,11 +40,14 @@ The domain that I choose was "Course and Professors Reviews at UIC". The reason 
      numbers fit the structure of your documents.
      A review-heavy corpus warrants different chunking than a long FAQ. -->
 
+     Since my documents are short reviews who are all seperated by a line spacing and are all equal length, I will split the documents into chunks by checking where there is a \n\n in the documents. In this case there will be no overlapping since the documents will all break off evenly. I will know if my chunks are too small or too large by simply looking at what is indside the chunk. All chuncks follow a format of Quality at the top, and word descriptions at the buttom, so all i need to look for is that those two thing are always at the beginnign and end of the chunk.
+
 **Chunk size:**
-
+Since these reviews are short and of equal spacing, to determine the chunk size I will simply look for where there is a \n\n in the documents.
 **Overlap:**
-
+There will be 0 overlapping since all reviews are seperated by a \n\n
 **Reasoning:**
+Since I inputted the data manually, I know how the reviews are spaced out making it easier to include the whole review without being confined to character limitations or tokens.
 
 ---
 
@@ -57,11 +60,17 @@ The domain that I choose was "Course and Professors Reviews at UIC". The reason 
      support, accuracy on domain-specific text, latency? -->
 
 **Embedding model:**
-
+The embedding model that I will be using is all-MiniLM-L6-v2 vi sentence-transformers. The reason for this is that this model can use vectors to capture meaning, not just keyword matches. This model also runs locally, no API key, has 384-dimesional vectors, is fast, and is accurate for short English reviews. 
 **Top-k:**
-
+Top-k will start off at 4 to not add to much noise to the LLM, but if the results are not as accurate I can easily bump this number to 5-6 since each professors has an average of 10+ reviews. 
 **Production tradeoff reflection:**
+If I deployed this for real users with cost off the table, I'd move from all-MiniLM-L6-v2 to a stronger model like OpenAI's text-embedding-3-large or all-mpnet-base-v2, weighing four tradeoffs. The reasons for these are as follow:
 
+- Domain accuracy: RMP reviews use slang, sarcasm, and emojis. A more capable model captures that informal tone better than MiniLM.
+
+- Context length: a longer input limit lets me embed larger or more detailed review chunks without truncating them.
+- Multilingual support: UIC has many international students, so reviews may mix languages or non-native phrasing — a multilingual model retrieves those reliably.
+- Latency: larger models are slower, so I'd balance the accuracy gain against keeping responses fast enough that users don't wait.
 ---
 
 ## Evaluation Plan
@@ -73,11 +82,11 @@ The domain that I choose was "Course and Professors Reviews at UIC". The reason 
 
 | # | Question | Expected answer |
 |---|----------|-----------------|
-| 1 | | |
-| 2 | | |
-| 3 | | |
-| 4 | | |
-| 5 | | |
+| 1 | Is workload something I should worry about when walking into Polakis class? | Multiple reviews state how his class is Lecture heavy, has a lot of homework assignments, and the material is super heavy|
+| 2 | Is it easy to get a hold of Anastasios Sidiropoulos if I ever get lost on any assignments or have questions? | Most reviews talk about how caring this professor is and how he is willing to help anyone who has a question for him.|
+| 3 | What is one praise most of Prof Pina students have about his class structure? | Most reviews talk about how they love how incerdibly organized class is. |
+| 4 | Which professor has the highest overall ranking? | Based on the provided information Luis Pina has the best overall ranking of all professors. |
+| 5 | Are there any exams in professors Natalie Parde class? | No exams but there are homework assignments and semester long projects that are easy to follow thanks to the instructions and resources she provides.|
 
 ---
 
@@ -87,9 +96,9 @@ The domain that I choose was "Course and Professors Reviews at UIC". The reason 
      Consider: noisy or inconsistent documents, missing source attribution, off-topic
      retrieval, chunks that split key information across boundaries. -->
 
-1.
+1. One of the issues that could arise is that for some of the professors the reviews that they have might be too short or vague to answer the question of the user. For example if a professor only has reviews such as "Nice class!" or "Wouldnt recommend." When a user wants to know something about the course material the Model will simply not have any information to go off.
 
-2.
+2. Another issue that may arise is conflicting information. Since some professors teach multiple classes and have been teaching for some time, reviews can often have conflict. For example a 2022 review by a User can say how his classes are easy and straightforward, but a 2024 review could say how the course is Lecture heavy and Tough.
 
 ---
 
@@ -100,6 +109,29 @@ The domain that I choose was "Course and Professors Reviews at UIC". The reason 
      Label each stage with the tool or library you're using.
      You can use ASCII art, a Mermaid diagram, or embed a sketch as an image.
      You'll use this diagram as context when prompting AI tools to implement each stage. -->
+# Project Architecture
+
+```mermaid
+flowchart TD
+    %% Your Mermaid code goes here
+    style ETL fill:#2d333b,stroke:#444c56,color:#adbac7,stroke-width:2px
+    style RAG fill:#2d333b,stroke:#444c56,color:#adbac7,stroke-width:2px
+    classDef default fill:#ffffff,stroke:#333333,color:#000000,stroke-width:2px;
+    linkStyle default stroke:#adbac7,stroke-width:2px;
+
+    subgraph ETL["Phase 1: Document Pipeline (ETL)"]
+        DI["Document Ingestion<br/>(Raw .txt Reviews)"] --> CH["Chunking<br/>(Separator: \n\n)"]
+        CH --> EM["Embedding<br/>(all-MiniLM-L6-v2)"]
+        EM --> VS[("Vector Store<br/>(ChromaDB)")]
+    end
+
+    subgraph RAG["Phase 2: Query Pipeline (RAG)"]
+        UQ(["User Query"]) --> RET["Retrieval<br/>(Semantic Search, Top-k: 5)"]
+        VS -.->|Returns top 5 chunks| RET
+        RET --> GEN["Generation<br/>(LLM: Groq llama-3.3-70b-versatile)"]
+        GEN --> GR(["Grounded Response<br/>(with Citations)"])
+    end
+```
 
 ---
 

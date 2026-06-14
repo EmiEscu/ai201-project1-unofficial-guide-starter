@@ -109,7 +109,6 @@ If I deployed this for real users with cost off the table, I'd move from all-Min
      Label each stage with the tool or library you're using.
      You can use ASCII art, a Mermaid diagram, or embed a sketch as an image.
      You'll use this diagram as context when prompting AI tools to implement each stage. -->
-# Project Architecture
 
 ```mermaid
 flowchart TD

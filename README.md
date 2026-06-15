@@ -1,15 +1,12 @@
 # The Unofficial Guide — Project 1
 
-> **How to use this template:**
-> Complete each section *after* you've built and tested the corresponding part of your system.
-> Do not write placeholder text — if a section isn't done yet, leave it blank and come back.
-> Every section below is required for submission. One-liners will not receive full credit.
+DEMO VIDEO: https://youtu.be/a4hkTrd3NhE
 
 ---
 
 ## Domain
 
-The domain that I choose was "Course and Professors Reviews at UIC". The reason why I chose this domain is because I am a rising transfer Junior at UIC and I am simply not familiar with the professors or the space at all. Sure I can go ahead a search each professor in Rate My Professor, but that will take too much time, and if I want to compare professors I have to make sure that they have similar classes. The reason why this knowledge is hard to find is simply because theres dozens of professors and remembering all of them and how they rank can be difficult. 
+The domain that I chose was "Course and Professor Reviews at UIC". The reason why I chose this domain is that I am a rising transfer junior at UIC and I am simply not familiar with the professors or the space at all. Sure, I can go ahead and search each professor on Rate My Professor, but that will take too much time; if I want to compare professors, I have to make sure that they have similar classes. The reason why this knowledge is hard to find is simply because there are dozens of professors, and remembering all of them and how they rank can be difficult.
 ---
 
 ## Documents
@@ -32,7 +29,7 @@ The domain that I choose was "Course and Professors Reviews at UIC". The reason 
 
 ## Chunking Strategy
 
-     Since my documents are short reviews who are all seperated by a line spacing and are all equal length, I will split the documents into chunks by checking where there is a \n\n in the documents. In this case there will be no overlapping since the documents will all break off evenly. I will know if my chunks are too small or too large by simply looking at what is indside the chunk. All chuncks follow a format of Quality at the top, and word descriptions at the buttom, so all i need to look for is that those two thing are always at the beginnign and end of the chunk.
+Since my documents are short reviews that are all separated by a blank line and are all of equal length, I will split the documents into chunks by checking where there is a \n\n in the documents. In this case, there will be no overlap since the documents will all break off evenly. I will know if my chunks are too small or too large by simply looking at what is inside the chunk. All chunks follow a format of "Quality" at the top and written descriptions at the bottom, so all I need to look for is that those two things are always at the beginning and end of the chunk.
 
 **Chunk size:**
 Since these reviews are short and of equal spacing, to determine the chunk size I will simply look for where there is a \n\n in the documents.
@@ -46,12 +43,6 @@ Since I inputted the data manually, I know how the reviews are spaced out making
 ---
 
 ## Embedding Model
-
-<!-- Name the embedding model you used and explain your choice.
-     Then answer: if you were deploying this system for real users and cost wasn't a constraint,
-     what tradeoffs would you weigh in choosing a different model?
-     Consider: context length limits, multilingual support, accuracy on domain-specific text,
-     latency, and local vs. API-hosted. -->
 
 **Model Used:**`all-MiniLM-L6-v2`, run locally through the `sentence-transformers` library (configured in `embed.py`). It produces 384-dimensional embeddings, and I normalize the vectors (`normalize_embeddings=True`) so they can be compared with cosine distance, which is the metric I pinned on the ChromaDB collection (`"hnsw:space": "cosine"`). The same model embeds both the chunks at index time and the user's query at retrieval time — that match is essential, since mixing models would make the distances meaningless.
 
@@ -118,31 +109,33 @@ Attribution is surfaced as a **Sources** list appended below every grounded answ
 
 
 **Question that failed:**
-Are there any negative points reviews bring up about parde teaching style and her class structure?
+Are there any negative reviews brought up about parde teaching style and her class structure?
 
 **What the system returned:**
-The system returned a pretty positive response: Students do not mention any negative points about Professor Parde's teaching style [1][3], instead, they praise her for being clear with her expectations, giving good feedback, and being accessible outside of class. The course structure is also described as straightforward with clear grading criteria [3]. No negative comments are made about her teaching style or class structure in the provided reviews.
+The system returned a pretty positive response: Students do not mention any negative points about Professor Parde's teaching style [1][3]; instead, they praise her for being clear with her expectations, giving good feedback, and being accessible outside of class. The course structure is also described as straightforward with clear grading criteria [3]. No negative comments are made about her teaching style or class structure in the provided reviews.
 
-At first glance there seems to be nothing wrong with this, there are sources for where it got this and it even sounds convincing. The real issue falls when you look at the sources themselves. Most sources that it retrieves are not from the Natalie_Parde.txt file and are simply from other professors documents, but it does accurately index only the ones for Natalie Parde. The issue is that the reviews being quoted have nothing negative about Natalie. 
+At first glance, there seems to be nothing wrong with this. There are sources for where it got this information, and it even sounds convincing. The real issue arises when you look at the sources themselves. Most of the sources that it retrieves are not from the Natalie_Parde.txt file and are simply from other professors' documents, even though it accurately indexes only the ones for Natalie Parde. The issue is that the reviews being quoted have nothing negative about Natalie.
+
 **Root cause (tied to a specific pipeline stage):**
-The root cause is the embedding and retrieval. other professors dominate the top-k. This can be because the metadata requires professors name to tie Parde to the correct chunks to retrieve and the system doesnt specify to only retrieve chunks for such professor.
+The root cause is the embedding and retrieval stage. Other professors dominate the top-k. This happens because the metadata requires the professor's name to tie Parde to the correct chunks to retrieve, and the system doesn't specify to only retrieve chunks for that specific professor.
 
 
 **What you would change to fix it:**
 
-By simply changing the name from just including 'parde' to including 'Natalie Parde' the system retrieves a review that matches these 'negative points' the user may be looking for with their initial input. Since the system retrieved better relavent chunks that were more relevent to the question with the full name of the professor, the retrieval code will likely work better if it connects lastnames or shorter names for a professor to connect vibes with a specific review. 
+One thing we can do is simply chnage the name from just including "Parde" to including "Natalie Parde," the system retrieves a review that matches the "negative points" the user may be looking for with their initial input. Since the system retrieved more relevant chunks that were closer to the question with the full name of the professor, the retrieval code will likely work better if it connects last names or shorter names for a professor to align with a specific review.
 
-Resolve the professor named in the query (map parde → Natalie Parde), then pass where={"professor": "Natalie Parde"} to collection.query(...). Now top-k can only come from her reviews — deterministically, regardless of wording.
-Optionally also prepend the professor name to each chunk's text before embedding, so identity is part of every vector instead of inconsistently present. This helps ranking but, on its own, is still softer than a hard metadata filter; the filter is the clean solution
+We can also resolve the professor named in the query (map "parde" → "Natalie Parde"), then pass where={"professor": "Natalie Parde"} to collection.query(...). Now top-k can only come from her reviews—deterministically, regardless of wording.
+
+We can also prepend the professor's name to each chunk's text before embedding so identity is part of every vector instead of inconsistently present. This helps ranking but, on its own, is still softer than a hard metadata filter; the filter is the clean solution.
 ---
 
 ## Spec Reflection
 
 
 **One way the spec helped you during implementation:**
-The Specs helped a ton. Simply having them there made it easier to understand the end goal of the program. It was like coding but in advance pseudocode. Having the specs done made it even easier to code the program since Claude also had a much more clear image of what it was supposed to build and a pipeline/architecture of the system.
+The specs helped a ton. Simply having them there made it easier to understand the end goal of the program. It was like coding in advanced pseudocode. Having the specs done made it even easier to code the program since Claude also had a much clearer image of what it was supposed to build, as well as a clear pipeline and architecture of the system.
 **One way your implementation diverged from the spec, and why:**
-One way my implementation diverged from my specs was by adding a lot more ways to verify that the outputs such as chunks and retrieval chunks to a query were accurate. I made sure to add a bunch of functions that would allow me to test these milestones to make sure the results were what I was looking for before moving on.
+One way my implementation diverged from my specs was by adding many more ways to verify that the outputs, such as chunks and retrieved chunks for a query, were accurate. I made sure to add a bunch of functions that would allow me to test these milestones to make sure the results were what I was looking for before moving on.
 ---
 
 ## AI Usage
@@ -150,17 +143,16 @@ One way my implementation diverged from my specs was by adding a lot more ways t
 **Instance 1**
 
 - *What I gave the AI:*
-     I gave Claude the results app.py returned the first time I ran it as I was confused on the reasons why there were indexes in the output and what they meant.
+     I gave Claude the results app.py returned the first time I ran it, as I was confused about why there were indexes in the output and what they meant.
 - *What it produced:*
-     It returned a summary explaining that these indexes really had no use since the retrieval chunks they were citing did not appear within the UI, so the user simply saw random indexes.
+     It returned a summary explaining that these indexes really had no use since the retrieved chunks they were citing did not appear within the UI, so the user simply saw random indexes.
 - *What I changed or overrode:*
-     Since it had already added the indexes, I thought it would be a good idea to continue within that route and I made sure to tell it to change the code to add a way to see those retrived chunks that were cited so that the user has a better understanding of where they come from.
-
+     Since it had already added the indexes, I thought it would be a good idea to continue down that route. I told it to modify the code to add a way to see those retrieved chunks that were cited so that the user has a better understanding of where they came from.
 **Instance 2**
 
 - *What I gave the AI:*
-     I gave Claude my chunking strategy that was withing planning.md as well as the pipeline I was going for the project.
+     I gave Claude my chunking strategy that was within planning.md as well as the pipeline I was going for in the project.
 - *What it produced:*
-     It produced a working chunking python script as well as a chunks.json file that was used to store all the chunks that it generated. 
+     It produced a working chunking Python script as well as a chunks.json file that was used to store all the chunks that it generated.
 - *What I changed or overrode:*
-     Since it had all the chunks generated in a .json file it was difficult to sort through them and see what was what, so i continued to prompt it to add more features to allow for more testing. For example, seeing all the chunks for one professor or simply looking for a specific prompt for that professor. 
+    Since it had all the chunks generated in a .json file, it was difficult to sort through them and see what was what. I continued to prompt it to add more features to allow for further testing. For example, this included features for seeing all the chunks for one professor or simply looking for a specific prompt for that professor.

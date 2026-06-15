@@ -86,7 +86,7 @@ If I deployed this for real users with cost off the table, I'd move from all-Min
 | 2 | Is it easy to get a hold of Anastasios Sidiropoulos if I ever get lost on any assignments or have questions? | Most reviews talk about how caring this professor is and how he is willing to help anyone who has a question for him.|
 | 3 | What is one praise most of Prof Pina students have about his class structure? | Most reviews talk about how they love how incerdibly organized class is. |
 | 4 | Which professor has the highest overall ranking? | Based on the provided information Luis Pina has the best overall ranking of all professors. |
-| 5 | Are there any exams in professors Natalie Parde class? | No exams but there are homework assignments and semester long projects that are easy to follow thanks to the instructions and resources she provides.|
+| 5 | Are there any exams in professors Natalie Parde class? | There are comnflicting reviews for this, some say that there are exams but dont really specify the amount. One thing that they do mention is how long the exams they have are and how they can be tough. The reviews also talk about homework assignments and semester long projects that are easy to follow thanks to the instructions and resources she provides. |
 
 ---
 

@@ -148,6 +148,8 @@ One way my implementation diverged from my specs was by adding many more ways to
      It returned a summary explaining that these indexes really had no use since the retrieved chunks they were citing did not appear within the UI, so the user simply saw random indexes.
 - *What I changed or overrode:*
      Since it had already added the indexes, I thought it would be a good idea to continue down that route. I told it to modify the code to add a way to see those retrieved chunks that were cited so that the user has a better understanding of where they came from.
+
+  
 **Instance 2**
 
 - *What I gave the AI:*
